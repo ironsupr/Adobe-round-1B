@@ -1,0 +1,22 @@
+# Adobe Hackathon Challenge 1B - Requirements
+# Optimized for CPU-only execution and fast performance
+
+# Core PDF processing
+PyMuPDF>=1.23.0
+
+# System monitoring (for resource constraints)
+psutil>=5.9.0
+
+# Standard library dependencies (no additional installs needed)
+# - argparse (built-in)
+# - os (built-in)
+# - sys (built-in)
+# - re (built-in)
+# - json (built-in)
+# - datetime (built-in)
+# - pathlib (built-in)
+# - typing (built-in)
+
+# Note: This solution uses a lightweight keyword-based approach
+# instead of heavy ML models to meet the <1GB model size and
+# <60 seconds execution time constraints

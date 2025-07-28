@@ -1,0 +1,52 @@
+# Adobe Hackathon Challenge 1B - Docker Compose Configuration
+version: '3.8'
+
+services:
+  adobe-challenge1b:
+    build: .
+    image: adobe-challenge1b:latest
+    container_name: adobe-challenge1b-container
+    
+    # Resource limits to meet challenge constraints
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '2.0'
+        reservations:
+          memory: 256M
+          cpus: '0.5'
+    
+    # Environment variables
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    
+    # Volume mounts (customize these paths)
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+    
+    # Override default command
+    command: >
+      python main_1b_dynamic.py 
+      --input /app/input/challenge1b_input.json
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import docudots_module.core; print('Ready')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    
+    # Restart policy
+    restart: "no"
+    
+    # Working directory
+    working_dir: /app
+
+# Optional: Add a volume for persistent output
+volumes:
+  output_data:
+    driver: local
